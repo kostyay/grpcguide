@@ -1,3 +1,8 @@
+---
+layout: default
+title: gRPC in practice, the introduction
+permalink: /grpc-introduction/
+---
 # gRPC in practice, the introduction
 
 ![gRPC in / REST out](/images/intro_banner.png "gRPC in / REST out")

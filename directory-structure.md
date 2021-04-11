@@ -1,3 +1,8 @@
+---
+layout: default
+title: gRPC in practice - directory structure, linting and more
+permalink: /directory-structure-linting
+---
 # gRPC in practice - directory structure, linting and more
 
 ## Let’s do a short recap
