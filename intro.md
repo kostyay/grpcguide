@@ -1,4 +1,4 @@
-## gRPC in practice, the introduction
+# gRPC in practice, the introduction
 
 ![gRPC in / REST out](/images/intro_banner.png "gRPC in / REST out")
 
@@ -14,7 +14,7 @@ While gRPC has been around for a long time now, we were still weary as if it may
 
 In this series of blog posts I will try to describe the challenges we faced and how we solved them.
 
-### Let’s define our requirements
+## Let’s define our requirements
 
 ![Our architecture](/images/intro_diagrom.png "Our architecture")
 
@@ -29,7 +29,7 @@ In this series of blog posts I will try to describe the challenges we faced and 
 
 Basically gRPC gives us all that and more.
 
-### But wait, why not just use REST API?
+## But wait, why not just use REST API?
 
 I’ve used REST API in all the previous products I’ve built. It’s very common and simple to use, definitely battle tested. There are clients for it in all programming languages. There is an expressive way to define them called OpenAPI (the swagger files).
 
