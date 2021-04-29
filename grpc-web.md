@@ -1,6 +1,6 @@
 ---
 layout: default
-title: gRPC-web: Using gRPC in Your Front-End Application
+title: "gRPC-web: Using gRPC in Your Front-End Application"
 permalink: /grpc-web-frontend
 ---
 
@@ -14,7 +14,7 @@ As you may remember from my previous [blog posts](https://grpcguide.com), we are
 
 After working that way for several months, we realized it doesn’t work as well as we’d imagined. As a result, we decided to adopt the [API Gateway/Backend For Frontend](https://samnewman.io/patterns/architectural/bff/) approach.
 
-![Current StackPulse architecture](/images/sp-arcg.png "Current StackPulse architecture")
+![Current StackPulse architecture](/images/sp-arch.png "Current StackPulse architecture")
 
 I will publish a different blog post about this change in the future. However, the main pain point was data consolidation across several microservices—the dreaded JOINs over gRPC.
 

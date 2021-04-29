@@ -1,0 +1,19 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+header {
+    min-height: 120px;
+    max-height: 120px;
+    padding: 5px;
+}
+
+#main_content {
+    min-height: calc(100vh - 450px);
+}
+
+footer {
+    height: 50px;
+    border-top: 1px #b5e853 dotted;
+}
