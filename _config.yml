@@ -21,7 +21,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://grpcguide.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: gr1m0
 github_username:  kostyay
-google_analytics: G-QWQJFX1V35
+google_analytics: G-HC3FJJMMQM
 
 # Build settings
 markdown: kramdown
