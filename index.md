@@ -1,5 +1,6 @@
 ---
 layout: default
+title: "Practical gRPC applications"
 ---
 ## Welcome
 The goal of [grpcguide.com](https://grpcguide.com) is to provide some useful articles about using gRPC in project (primarily written in Go).
