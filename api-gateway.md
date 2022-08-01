@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "API Gateway for gRPC microservices"
-permalink: /api-gateway-for-groc
+permalink: /building-api-gateway-for-groc
 ---
 
 ## API Gateway for gRPC microservices
