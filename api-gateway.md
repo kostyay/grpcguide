@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "API Gateway for gRPC microservices"
-permalink: /building-api-gateway-for-groc
+permalink: /building-api-gateway-for-grpc
 ---
 
 ## API Gateway for gRPC microservices
@@ -31,9 +31,9 @@ We worked like that for a few months, but had few issues with this approach:
 
     It started to confuse our engineers, as they puzzled over some questions:
 
-* Is there an application flow that could cause a certain function to be called externally?
-* Should I filter sensitive data when returning it as it may have been called from an external endpoint?
-* Do I need to reimplement this endpoint for internal use if I want to return some internal data?
+    * Is there an application flow that could cause a certain function to be called externally?
+    * Should I filter sensitive data when returning it as it may have been called from an external endpoint?
+    * Do I need to reimplement this endpoint for internal use if I want to return some internal data?
 
     A wrong answer to any one of these questions could lead to potential security issues. Mistakenly a developer could return sensitive data via an external endpoint, or someone could forget to add authz/authn middleware to one of the external endpoints, which could then cause a compromise. Ultimately we wanted to minimize the attack surface and have as little as possible endpoints externally accessible. In fact, we want to have 1 or 2 microservices that are internet facing and everything else to be internal.
 
@@ -70,7 +70,7 @@ You are now faced with a new product requirement to create an inventory view pag
 In essence, you need to perform a JOIN over data managed by 2 separate microservices that provide gRPC methods to help you.
 
 
-![JOINed data view](images/api-gateway/image4.png "JOINed data view")
+![JOINed data view](images/api-gateway/image3.png "JOINed data view")
 
 
 As you can imagine, this is a very common use case. In fact in many cases the JOIN logic could be more complex.
@@ -98,7 +98,7 @@ As we worked on this, we kept thinking: Surely_ someone_ must have come across t
 There are many references to this challenge, namely [Backend for Frontend/API Gateway](https://microservices.io/patterns/apigateway.html).
 
 
-![BFF Backend For Frontend](images/api-gateway/image5.png "BFF Backend For Frontend")
+![BFF Backend For Frontend](images/api-gateway/image4.png "BFF Backend For Frontend")
 
 
 The API Gateway is implemented as a standalone microservice that has no state. It maintains multiple gRPC clients with connections open to each of the microservices. It implements the external API and translates external requests to one or more internal API requests. In case there are several requests to be made they can be done in parallel using goroutines, the data can then be joined together and processed to build a response object that contains only the data needed.
@@ -122,7 +122,6 @@ Not everything is advantageous with API Gateways, but while there are some disad
 The main thing you need to consider is that there will be _some _message and endpoint duplication (but that's not necessary a bad thing):
 
 
-
 1. A message or an endpoint defined in an internal service that needs to be externally available will have to be redefined in the gateway. However, over time, you will find that the external objects and internal objects are starting to differ, ever so slightly. The data fields you want externally are not necessarily the same as the ones you want internally.
 2. You will need to write some application logic that converts between one or several internal proto messages to API gateway proto messages. This will be mundane data transformation code, and it's easy to make mistakes writing it.
 3. You will have to update 2 services in any case where you need to expose some additional data. Let's say you want to add a new external attribute called _birthday_date_ to the _User_ object. You will have to update the proto messages both in the API service and the internal service responsible for the users domain.
@@ -132,7 +131,7 @@ The main thing you need to consider is that there will be _some _message and end
 
 Let’s examine the following example that demonstrates a very common use case you will encounter creating API Gateways
 
-![API Gateway usecase example](images/api-gateway/image6.png "API Gateway usecase example")
+![API Gateway usecase example](images/api-gateway/image5.png "API Gateway usecase example")
 
 
 Here we have 2 internal microservices — Users and Orders —  and we have the API-GW microservice.
@@ -142,7 +141,7 @@ Here we have 2 internal microservices — Users and Orders —  and we have the 
 
 Since we are just starting the _CreateUser_ and _ListUsers_ methods in the API-GW match the ones in Users service. The data they both exchange is essentially the same. Nevertheless, like we previously mentioned, we have to define gRPC service in API-GW with all the messages and methods, as it may change in the future.
 
-![Users Service](images/api-gateway/image7.png "Users Service")
+![Diff view of API-GW User’s gRPC service vs Users gRPC service](images/api-gateway/image6.png "Diff view of API-GW User’s gRPC service vs Users gRPC service")
 
 
 _Diff view of API-GW User’s gRPC service vs Users gRPC service_
@@ -150,7 +149,9 @@ _Diff view of API-GW User’s gRPC service vs Users gRPC service_
 API-GW implements logic for translating incoming external requests and responses into internal requests after forwarding them to the Users service.
 
 
-![Users Service](images/api-gateway/image8.png "Users Service")
+![Example of CreateUser method in API-GW
+](images/api-gateway/image7.png "Example of CreateUser method in API-GW
+")
 
 
 _Example of CreateUser method in API-GW_
@@ -163,14 +164,14 @@ On the other hand, the implementation of OrdersService logic in the API-GW is mo
 In our case it has a method called ListOrdersWithUser which returns a combination of data returned by the internal Users service and the Orders service.
 
 
-![Orders Service](images/api-gateway/image9.png "Orders Service")
+![The Order object contains the user_email field which comes from the Users microservice](images/api-gateway/image8.png "The Order object contains the user_email field which comes from the Users microservice")
 
 
 _The Order object contains the user_email field which comes from the Users microservice_
 
 In this case the implementation of ListOrdersWithUser method will look like this:
 
-![ListOrdersWithUser Method](images/api-gateway/image10.png "ListOrdersWithUser Method")
+![ListOrdersWithUser Method](images/api-gateway/image9.png "ListOrdersWithUser Method")
 
 
 _Query both internal services and build combined data view_
