@@ -26,9 +26,12 @@ google_analytics: G-HC3FJJMMQM
 # Build settings
 markdown: kramdown
 theme: jekyll-theme-hacker
+#remote_theme: daattali/beautiful-jekyll@6.0.1
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

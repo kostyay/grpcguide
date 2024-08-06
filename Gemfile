@@ -8,7 +8,9 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 3.9.2"
+gem "jekyll", "~> 3.9.5"
+
+gem "github-pages"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 gem "minima", "~> 2.5.1"
@@ -20,8 +22,9 @@ gem "jekyll-theme-hacker", "~> 0.2.0"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.15.1"
+  gem "jekyll-feed", "~> 0.17.0"
   gem "jekyll-sitemap", "~> 1.4.0"
+  gem "jekyll-seo-tag", "~> 2.8.0"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -38,3 +41,5 @@ gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
 # kramdown v1, comment out this line.
 gem "kramdown-parser-gfm", "~> 1.1.0"
 
+
+gem "webrick", "~> 1.8"
